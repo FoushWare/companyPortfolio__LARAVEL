@@ -4,24 +4,63 @@
 
 ## Installing / Getting started
 
-First, clone the project. Copy `server/.env.example` to `server/.env` and `client/.env.example` to `client/.env`
+> [ First working with laradock ](https://laradock.io/)  
 
-Run the following command:
+Let’s see how easy it is to setup our demo stack PHP, NGINX, MySQL, Redis and Composer:
 
-```shell
-docker-compose up -d
+1. Clone Laradock inside your PHP project
+
+           git clone https://github.com/Laradock/laradock.git 
+
+2. Enter the laradock folder and rename env-example to .env.
+
+         cp env-example .env
+3. Run your containers:
+
+         docker-compose up -d apache2 mysql phpmyadmin redis workspace 
+4. Open your project’s .env file and set the following:
+
+            DB_HOST=mysql
+            REDIS_HOST=redis
+            QUEUE_HOST=beanstalkd
+5. Open your browser and visit localhost: http://localhost.
+
+    That's it! enjoy :)
+
+
+in .env in laradock edit it 
+
+
+         APP_CODE_PATH_HOST  => pointing to your project if use this structure 
+            * laradock
+            * project-1
+            * project-2
+ ```
+ APP_CODE_PATH_HOST=../BackEnd
+ APP_CODE_PATH_CONTAINER=/var/www/BackEnd/public
+ APACHE_DOCUMENT_ROOT=/var/www/BackEnd/public/public
+
+
+ ```
+
+## Laraval Voyager Admin 
+
+```
+    $ cd <your laradock folder>
+
+    $ docker-compose exec workspace bash
+
+    $ cd <your project>
+
 ```
 
-This will first build the image based off the project's `Dockerfile`.  After the image is built, it will start and the current working directory will be mounted to the app container's `/opt/src`.
 
-This spins up a postgres instance, starts client at `http://localhost:3000`
-and starts server at `http://localhost:4000`. Server calls are proxied, so `http://localhost:3000/api/users` will hit `http://localhost:4000/api/users` automagically.
+    installion:
+            composer require tcg/voyager 
 
-To init the database:
 
-```shell
-docker exec -it server php server/artisan migrate --seed
-```
+    if you prefer installing it with the dummy data run the following command:
+                php artisan voyager:install --with-dummy
 
 
 ## Developing
@@ -44,6 +83,8 @@ The current technologies used by the starter kit are as follows:
 | Containerization | [Docker](https://www.docker.com/) | Containers make deployment easy |
 | Testing Framework | [Jest](https://facebook.github.io/jest/)  / [PHPUnit](https://phpunit.de/) | Complete testing package with an intuitive syntax |
 | Linter | [tslint](https://github.com/palantir/tslint) | Keeps your TypeScript code consistent |
+| NUXT JS | [tslint](https://github.com/nuxt/nuxt.js) |The Intuitive Vue Framework |
+| voyager | [tslint](https://github.com/the-control-group/voyager) |The Missing Laravel Admin |
 
 ### Prerequisites
 

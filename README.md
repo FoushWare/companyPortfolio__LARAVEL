@@ -92,17 +92,144 @@ The current technologies used by the starter kit are as follows:
 
 ### Setting up Dev
 
-See Getting Started section for steps.
-
-Once spun up, you can shell into the client or server instances like:
-
+#### APIS 
 ```shell
-docker exec -it client bash
+    Routes Needed 
+
+        Route::get('module/{module_name}','ApiController@index');
+
+        Route::get('module/{module_name}/{id}','ApiController@getById');
+
+```
+Example : 
+    http://localhost/api/module/teams
+```json
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "name": "foush",
+            "image": "teams/August2020/w3SaYCPnm4ovtZCXVkmB.jpeg",
+            "job_title": "BackEnd Developer",
+            "LinkedIn": "https://www.linkedin.com/in/ahmed-fouad-162091134/",
+            "facebook": "https://www.facebook.com/foush60",
+            "created_at": "2020-08-05T11:56:26.000000Z",
+            "updated_at": "2020-08-05T11:56:26.000000Z"
+        }
+    ],
+    "first_page_url": "http://localhost/api/module/teams?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http://localhost/api/module/teams?page=1",
+    "next_page_url": null,
+    "path": "http://localhost/api/module/teams",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 1,
+    "total": 1
+}
+
 ```
 
-```shell
-docker exec -it server bash
+Example 2:
+    http://localhost/api/module/teams/1
+```json
+{
+    "id": 1,
+    "name": "foush",
+    "image": "teams/August2020/w3SaYCPnm4ovtZCXVkmB.jpeg",
+    "job_title": "BackEnd Developer",
+    "LinkedIn": "https://www.linkedin.com/in/ahmed-fouad-162091134/",
+    "facebook": "https://www.facebook.com/foush60",
+    "created_at": "2020-08-05T11:56:26.000000Z",
+    "updated_at": "2020-08-05T11:56:26.000000Z"
+}
 ```
+
+### Controllers 
+
+ApiController:
+
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ApiController extends Controller
+{
+    protected $module_name;
+    protected   $model;
+    //
+    public function index($module_name){
+        try{
+            $this->setModuleName($module_name);
+            $check =$this->initModel();
+            if($check === false){
+                return response()->json("you can not access this module");
+            }
+            $data = $this->model->paginate(10);
+            return \response()->json($data);
+        }catch(\Exception $e){
+            dd($e);
+        }
+    }
+
+
+    public function getById($module_name,$id){
+        try{
+            $this->setModuleName($module_name);
+            $check = $this->initModel();
+            if($check === false){
+                return response()->json("you can not access this module");
+            }
+            $data = $this->model->find($id);
+            if($data){
+                return \response()->json($data);
+            }
+            return \response()->json();
+
+        }catch(\Exception $e){
+            dd($e);
+        }
+    }
+
+    protected function setModuleName($module_name){
+        $this->module_name = $module_name;
+    }
+    protected function initModel(){
+        // I want to make sure about somethings like module 
+        /**
+         * lowercase
+         * singler
+         * camelcase And first char is Capital 
+         */ 
+        $module = \Str::lower($this->module_name);
+        $module = \Str::singular($module);
+        $module =   \Str::camel($module);
+        $module =   \Str::ucfirst($module);
+        if(\in_array($module,$this->expectModules())){
+            return false;
+        }
+        $nameSpace  =   'App\\' . $module;
+        // Make object of the Model 
+        $this->model = new $nameSpace;
+        // dd($module);
+    }
+    protected function expectModules()
+    {
+        return ['Contact'];
+    }
+}
+
+```
+
+
+
+
 
 ### Building
 

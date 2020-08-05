@@ -14,12 +14,12 @@ class ApiController extends Controller
             $this->setModuleName($module_name);
             $check =$this->initModel();
             if($check === false){
-                return response()->json("you can not access this module");
+                return $this->youCantAccess();
             }
             $data = $this->model->paginate(10);
-            return \response()->json($data);
+            return $this->successWithData($data);
         }catch(\Exception $e){
-            dd($e);
+            $this->ResponseError($e->getMessage());
         }
     }
 
@@ -29,19 +29,38 @@ class ApiController extends Controller
             $this->setModuleName($module_name);
             $check = $this->initModel();
             if($check === false){
-                return response()->json("you can not access this module");
+                return $this->youCantAccess();
             }
             $data = $this->model->find($id);
             if($data){
-                return \response()->json($data);
+                return $this->successWithData($data);
             }
-            return \response()->json();
+            return $this->res([],false,"We can not find this id");
 
         }catch(\Exception $e){
-            dd($e);
+            $this->ResponseError($e->getMessage());
         }
     }
 
+    protected function ResponseError($e){
+        return $this->res([],false,$e);
+    }
+
+    protected function successWithData($data){
+        return $this->res($data,true,'Here what we found in '.$this->module_name);
+    }
+    protected function youCantAccess(){
+        return $this->res([],false,"you can not access this module");
+
+    }
+    protected function res($data=[],$status = true, $message =''){
+        $data =[
+            'payload'   =>  $data,
+            'status'    =>  $status,
+            'message'   =>  $message  
+        ];
+        return \response()->json($data);
+    }
     protected function setModuleName($module_name){
         $this->module_name = $module_name;
     }

@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//Get Data from the adminpanel [voyager laravel]
 Route::get('module/{module_name}','ApiController@index');
 
 Route::get('module/{module_name}/{id}','ApiController@getById');
+// Store Data to the database 
+Route::post('contacts','ApiController@storeContact');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

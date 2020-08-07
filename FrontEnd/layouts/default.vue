@@ -16,9 +16,9 @@
                 <Icon type="ios-keypad"></Icon>Services
               </NuxtLink>
             </MenuItem>
-            
+
             <MenuItem name="3">
-              <NuxtLink to="/">
+              <NuxtLink to="/teams">
                 <Icon type="ios-analytics"></Icon>Teams
               </NuxtLink>
             </MenuItem>
@@ -48,7 +48,7 @@
             </MenuItem>
 
             <MenuItem name="8">
-              <NuxtLink to="/">
+              <NuxtLink to="/clients">
                 <Icon type="ios-paper"></Icon>Clients
               </NuxtLink>
             </MenuItem>

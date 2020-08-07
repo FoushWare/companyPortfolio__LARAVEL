@@ -1,5 +1,10 @@
 
 export default {
+  env: {
+    baseUrl: process.env.BASE_URL || ' http://127.0.0.1',
+    moduleUrl: process.env.MODULE_URL || 'http://127.0.0.1/api/module/',
+    imageUrl: process.env.IMAGE_URL || 'http://127.0.0.1/storage/'
+  },
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -36,7 +41,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/iview'
+    '@/plugins/iview',
+    '@/plugins/images'
   ],
   /*
   ** Auto import components
@@ -47,11 +53,15 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
+    '@nuxtjs/dotenv',
+
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
+    '@nuxtjs/axios'
+
   ],
   /*
   ** Build configuration

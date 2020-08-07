@@ -38,7 +38,7 @@ class ApiController extends Controller
             if($check === false){
                 return $this->youCantAccess();
             }
-            $data = $this->model->paginate(10);
+            $data = $this->model->paginate(2);
             return $this->successWithData($data);
         }catch(\Exception $e){
             $this->ResponseError($e->getMessage());

@@ -1,62 +1,98 @@
+
 <template>
-  <div>
-    <Nuxt />
+  <div class="layout">
+    <Layout>
+      <Header>
+        <Menu mode="horizontal" theme="dark" active-name="1">
+          <div class="layout-logo"></div>
+          <div class="layout-nav">
+            <MenuItem name="1">
+              <NuxtLink to="/">
+                <Icon type="ios-navigate"></Icon>Home
+              </NuxtLink>
+            </MenuItem>
+            <MenuItem name="2">
+              <NuxtLink to="/">
+                <Icon type="ios-keypad"></Icon>Services
+              </NuxtLink>
+            </MenuItem>
+            
+            <MenuItem name="3">
+              <NuxtLink to="/">
+                <Icon type="ios-analytics"></Icon>Teams
+              </NuxtLink>
+            </MenuItem>
+
+            <MenuItem name="4">
+              <NuxtLink to="/">
+                <Icon type="ios-paper"></Icon>Our Works
+              </NuxtLink>
+            </MenuItem>
+
+            <MenuItem name="5">
+              <NuxtLink to="/">
+                <Icon type="ios-paper"></Icon>About Us
+              </NuxtLink>
+            </MenuItem>
+
+            <MenuItem name="6">
+              <NuxtLink to="/">
+                <Icon type="ios-paper"></Icon>Privacy
+              </NuxtLink>
+            </MenuItem>
+
+            <MenuItem name="7">
+              <NuxtLink to="/">
+                <Icon type="ios-paper"></Icon>Terms And Conditons
+              </NuxtLink>
+            </MenuItem>
+
+            <MenuItem name="8">
+              <NuxtLink to="/">
+                <Icon type="ios-paper"></Icon>Clients
+              </NuxtLink>
+            </MenuItem>
+          </div>
+        </Menu>
+      </Header>
+      <Content :style="{padding: '0 50px',marginTop:'20px'}">
+        <Card>
+          <div style="min-height: 200px;">
+            <Nuxt />
+          </div>
+        </Card>
+      </Content>
+      <Footer class="layout-footer-center">2011-2016 &copy; TalkingData</Footer>
+    </Layout>
   </div>
 </template>
-
-<style>
-html {
-  font-family:
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
+<script>
+export default {};
+</script>
+<style scoped>
+.layout {
+  border: 1px solid #d7dde4;
+  background: #f5f7f9;
+  position: relative;
   border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
+  overflow: hidden;
 }
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
+.layout-logo {
+  width: 100px;
+  height: 30px;
+  background: #5b6270;
+  border-radius: 3px;
+  float: left;
+  position: relative;
+  top: 15px;
+  left: 20px;
 }
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
+.layout-nav {
+  margin: 0 10px 0 10px;
+  margin-right: 20px;
 }
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+.layout-footer-center {
+  text-align: center;
 }
 </style>
+

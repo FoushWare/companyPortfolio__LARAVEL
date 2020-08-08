@@ -12,7 +12,7 @@
               </NuxtLink>
             </MenuItem>
             <MenuItem name="2">
-              <NuxtLink to="/">
+              <NuxtLink to="/services">
                 <Icon type="ios-keypad"></Icon>Services
               </NuxtLink>
             </MenuItem>
@@ -30,19 +30,19 @@
             </MenuItem>
 
             <MenuItem name="5">
-              <NuxtLink to="/">
+              <NuxtLink to="/pages/1">
                 <Icon type="ios-paper"></Icon>About Us
               </NuxtLink>
             </MenuItem>
 
             <MenuItem name="6">
-              <NuxtLink to="/">
+              <NuxtLink to="/pages/3">
                 <Icon type="ios-paper"></Icon>Privacy
               </NuxtLink>
             </MenuItem>
 
             <MenuItem name="7">
-              <NuxtLink to="/">
+              <NuxtLink to="/pages/2">
                 <Icon type="ios-paper"></Icon>Terms And Conditons
               </NuxtLink>
             </MenuItem>

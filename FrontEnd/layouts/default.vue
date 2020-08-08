@@ -24,7 +24,7 @@
             </MenuItem>
 
             <MenuItem name="4">
-              <NuxtLink to="/">
+              <NuxtLink to="/our_works">
                 <Icon type="ios-paper"></Icon>Our Works
               </NuxtLink>
             </MenuItem>
